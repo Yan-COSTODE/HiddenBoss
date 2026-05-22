@@ -4,8 +4,6 @@ using UnityEngine;
 [Serializable]
 public class Timer
 {
-	#region Fields & Properties
-	#region Fields
 	[SerializeField] private string sId;
 	[SerializeField] private float fDuration;
 	[SerializeField] private float fTime;
@@ -16,20 +14,16 @@ public class Timer
 	[SerializeField] private bool bIsLooping;
 	[SerializeField] private bool bIsPaused;
 	private bool bUseUnscaledTime;
-	#endregion
 	
-	#region Properties
 	public string ID => sId;
 	public bool Paused => bIsPaused;
 	public Action OnComplete => onComplete;
 	public Action OnStart => onStart;
 	public Action<float> OnUpdate => onUpdate;
 	public float Percent => GetCurrentTime() / fDuration;
-	#endregion
-	#endregion
+	public bool Completed => fTime >= fDuration;
 
-	#region Methods
-	public Timer(string _sId, float _fDuration, float _fTimeRemaining, EEasing _easing = EEasing.EASE_NONE, Action _onComplete = null,
+	public Timer(string _sId, float _fDuration, float _fTimeRemaining = 0.0f, EEasing _easing = EEasing.EASE_NONE, Action _onComplete = null,
 		Action _onStart = null, Action<float> _onUpdate = null, bool _bIsLooping = false, bool _bIsPaused = false,
 		bool _bUseUnscaledTime = false)
 	{
@@ -71,5 +65,4 @@ public class Timer
 	}
 
 	public void SetPaused(bool _status) => bIsPaused = _status;
-	#endregion Methods
 }

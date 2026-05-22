@@ -21,12 +21,8 @@ public struct SKeyValuePair<TKey, TValue>
 [Serializable]
 public class SerializableDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
 {
-	#region Fields & Properties
-	#region Fields
 	[SerializeField] private List<SKeyValuePair<TKey, TValue>> dictionary = new();
-	#endregion
 	
-	#region Properties
 	public int Count => dictionary.Count;
 	public IEnumerable<TKey> Keys
 	{
@@ -45,10 +41,7 @@ public class SerializableDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKe
 				yield return _pair.Value;
 		}
 	}
-	#endregion
-	#endregion
 
-	#region Methods
 	public TValue this[TKey _key]
 	{
 		get
@@ -123,5 +116,4 @@ public class SerializableDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKe
 		for (int i = 0; i < dictionary.Count; i++)
 			yield return new KeyValuePair<TKey, TValue>(dictionary[i].Key, dictionary[i].Value);
 	}
-	#endregion Methods
 }

@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class TimerManager : Singleton<TimerManager>
 {
-	#region Fields & Properties
-	#region Fields
 	[SerializeField] private SerializableDictionary<string, Timer> activeTimers = new();
 	private readonly List<string> timersToRemove = new();
-	#endregion
-	
-	#region Properties
-	#endregion
-	#endregion
 
-	#region Methods
     private void Update()
     {
 	    foreach (KeyValuePair<string, Timer> _timer in activeTimers)
@@ -30,7 +22,7 @@ public class TimerManager : Singleton<TimerManager>
 	    
 	    _timer.UpdateTimer();
 	    
-	    if (_timer.Percent >= 1.0f)
+	    if (_timer.Completed)
 		    timersToRemove.Add(_timer.ID);
     }
     
@@ -87,5 +79,4 @@ public class TimerManager : Singleton<TimerManager>
     }
 
     private string GenerateTimerID() => IDGenerator.GenerateID("timer_");
-    #endregion Methods
 }
