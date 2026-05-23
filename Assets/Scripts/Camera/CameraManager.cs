@@ -25,9 +25,9 @@ public class CameraManager : Singleton<CameraManager>
         OnGoToScreen = () => SetBool(true, true);
         OnCompletedToBase = () => SetBool(false, false);
         OnCompletedToScreen = () => SetBool(false, true);
-        mainCamera.transform.position = baseCameraPosition.position;
-        mainCamera.transform.rotation = baseCameraPosition.rotation;
-        SetBool(false, false);
+        mainCamera.transform.position = computerScreenPosition.position;
+        mainCamera.transform.rotation = computerScreenPosition.rotation;
+        SetBool(false, true);
     }
 
     private void OnDestroy()

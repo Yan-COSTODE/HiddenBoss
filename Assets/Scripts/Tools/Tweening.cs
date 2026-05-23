@@ -3,6 +3,23 @@ using UnityEngine;
 
 public static class Tweening
 {
+	public static void DOMoveLocal(this RectTransform _transform, Vector2 _position, float _duration, EEasing _easing = EEasing.EASE_NONE)
+	{
+		Vector2 _basePositon = _transform.anchoredPosition;
+		TimerManager.Instance.Create(_duration, _easing, () => SafeMoveLocal(_transform, _position), null, (_time) =>
+		{
+			SafeMoveLocal(_transform, Vector2.Lerp(_basePositon, _position, _time /  _duration));
+		});
+	}
+	
+	private static void SafeMoveLocal(RectTransform _transform, Vector3 _position)
+	{
+		if (!_transform)
+			return;
+
+		_transform.anchoredPosition = _position;	
+	}
+	
 	public static void DOMove(this Transform _transform, Vector3 _position, float _duration, EEasing _easing = EEasing.EASE_NONE)
 	{
 		Vector3 _basePositon = _transform.position;

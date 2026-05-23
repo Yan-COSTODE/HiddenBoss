@@ -1,20 +1,41 @@
 using System;
 using UnityEngine;
 
+[Serializable]
+public struct PlayerData
+{
+    public string playerName;
+    public double score;
+    public float fTimer;
+}
+
 public class Player : Singleton<Player>
 {
-    [SerializeField] private double score = 0;
-    private float fTimer = 0;
+    [SerializeField] private PlayerData playerData;
+    
+    public PlayerData PlayerData => playerData;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        playerData.score = 0;
+        playerData.fTimer = 0;
+    }
 
     private void Update()
     {
-        fTimer += Time.deltaTime;
-        HUD.Instance.SetTime(fTimer);
+        playerData.fTimer += Time.deltaTime;
+        HUD.Instance.SetTime(playerData.fTimer);
     }
 
     public void AddScore(double _amount)
     {
-        score += _amount;
-        HUD.Instance.SetScore(score);
+        playerData.score += _amount;
+        HUD.Instance.SetScore(playerData.score);
+    }
+
+    public void SetName(string _name)
+    {
+        playerData.playerName = _name;
     }
 }

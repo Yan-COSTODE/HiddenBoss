@@ -4,12 +4,21 @@ public class ControlManager : Singleton<ControlManager>
 {
     [SerializeField] private KeyCode switchCamera = KeyCode.Space;
     [SerializeField] private KeyCode addScore = KeyCode.A;
+    [SerializeField] private bool bDisable = true;
 
+    public bool Disabled => bDisable;
+    
     private void Update()
     {
+        if (bDisable)
+            return;
+        
         if (Input.GetKeyDown(switchCamera))
             CameraManager.Instance.SwitchCamera();
-        if (Input.GetKey(addScore))
-            Player.Instance.AddScore(100.5);
+    }
+    
+    public void SetEnable(bool _status)
+    {
+        bDisable = _status;
     }
 }
