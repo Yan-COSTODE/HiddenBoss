@@ -3,7 +3,6 @@ using UnityEngine;
 public class ControlManager : Singleton<ControlManager>
 {
     [SerializeField] private KeyCode switchCamera = KeyCode.Space;
-    [SerializeField] private KeyCode addScore = KeyCode.A;
     [SerializeField] private bool bDisable = true;
 
     public bool Disabled => bDisable;
@@ -19,6 +18,6 @@ public class ControlManager : Singleton<ControlManager>
     
     public void SetEnable(bool _status)
     {
-        bDisable = _status;
+        bDisable = !_status;
     }
 }

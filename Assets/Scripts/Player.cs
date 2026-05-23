@@ -2,11 +2,16 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public struct PlayerData
+public class PlayerData
 {
     public string playerName;
     public double score;
     public float fTimer;
+
+    public override string ToString()
+    {
+        return $"{playerName} : {score} : {fTimer}s";
+    }
 }
 
 public class Player : Singleton<Player>
