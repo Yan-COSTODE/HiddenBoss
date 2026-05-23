@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +10,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private TMP_InputField nameText;
     [SerializeField] private LeaderboardItem leaderboardItem;
     [SerializeField] private Transform leaderboardContainer;
+    [SerializeField] private GameObject[] toActivate;
 
     private void Awake()
     {
@@ -27,14 +27,19 @@ public class StartMenu : MonoBehaviour
 
     private void UpdateName(string _name)
     {
-        Player.Instance.SetName(name);
+        Player.Instance.SetName(_name);
     }
     
     private void Play()
     {
-        Debug.Log("Play");
         gameObject.SetActive(false);
         windowsButton.interactable = false;
+        
+        foreach (GameObject _go in toActivate)
+            _go.SetActive(true);
+
+        Boss.Instance.onBossEnter?.Invoke();
+        Boss.Instance.GenerateTask();
     }
     
     private void Quit()
@@ -46,7 +51,6 @@ public class StartMenu : MonoBehaviour
 #else
         Application.Quit();
 #endif
-        LeaderboardManager.Instance.AddScoreToLeaderBoard(Player.Instance.PlayerData);
     }
     
     private void ShowLeaderboard()

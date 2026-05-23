@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameWindows : MonoBehaviour
 {
+    public Action OnOpened;
+    public Action OnClosed;
+    
     [SerializeField] private Button closeButton;
     [SerializeField] private RectTransform closeTransform;
     [SerializeField] private float fOpeningTime = 2.0f;
@@ -10,7 +14,8 @@ public class GameWindows : MonoBehaviour
     [SerializeField] private EEasing easing = EEasing.EASE_NONE;
     private RectTransform rectTransform;
     
-
+    public Button CloseButton => closeButton;
+    
     private void Awake()
     {
         closeButton.onClick.AddListener(Close);
@@ -22,12 +27,14 @@ public class GameWindows : MonoBehaviour
     public void Open()
     {
         float _time = fOpeningTime;
+        OnOpened?.Invoke();
         rectTransform.DOMoveLocal(Vector3.zero, _time, easing);
         transform.DOScale(Vector3.one, _time, easing);
     }
 
     public void Close()
     {
+        OnClosed?.Invoke();
         rectTransform.DOMoveLocal(closeTransform.anchoredPosition, fClosingTime, easing);
         transform.DOScale(Vector3.zero, fClosingTime, easing);
     }

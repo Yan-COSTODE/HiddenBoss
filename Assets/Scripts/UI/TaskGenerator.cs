@@ -36,12 +36,22 @@ public class TaskGenerator : MonoBehaviour
         task4Button.onClick.AddListener(() => StartTask(ETaskType.TASK4));
     }
 
+    private void SetAllButtonVisibility(bool _status)
+    {
+        task1Button.interactable = _status;
+        task2Button.interactable = _status;
+        task3Button.interactable = _status;
+        task4Button.interactable = _status;
+        GetComponentInParent<GameWindows>().CloseButton.interactable = _status;
+    }
+    
     private void StartTask(ETaskType _taskType)
     {
         taskType = _taskType;
         ControlManager.Instance.SetEnable(false);
         taskText.text = "";
         iLineCount = 0;
+        SetAllButtonVisibility(false);
 
         switch (_taskType)
         {
@@ -62,6 +72,7 @@ public class TaskGenerator : MonoBehaviour
     {
         ControlManager.Instance.SetEnable(true);
         taskType = ETaskType.NONE;
+        SetAllButtonVisibility(true);
     }
 
     private void AddLine(string _line)
@@ -78,7 +89,7 @@ public class TaskGenerator : MonoBehaviour
         }
     }
     
-    //Raindrop
+    //Console
     private void Task1()
     {
         int _length = 50;
@@ -97,16 +108,19 @@ public class TaskGenerator : MonoBehaviour
         });
     }
     
+    //Excel
     private void Task2()
     {
         
     }
     
+    //Mail
     private void Task3()
     {
         
     }
     
+    //Office
     private void Task4()
     {
         

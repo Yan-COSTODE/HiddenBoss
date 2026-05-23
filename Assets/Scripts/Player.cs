@@ -16,9 +16,13 @@ public class PlayerData
 
 public class Player : Singleton<Player>
 {
+    public Action OnScoreAdded;
+    
     [SerializeField] private PlayerData playerData;
+    private ETaskType currentTask = ETaskType.NONE;
     
     public PlayerData PlayerData => playerData;
+    public ETaskType CurrentTask => currentTask;
 
     protected override void Awake()
     {
@@ -33,8 +37,14 @@ public class Player : Singleton<Player>
         HUD.Instance.SetTime(playerData.fTimer);
     }
 
+    public void SetTaskType(ETaskType _taskType)
+    {
+        currentTask = _taskType;
+    }
+    
     public void AddScore(double _amount)
     {
+        OnScoreAdded?.Invoke();
         playerData.score += _amount;
         HUD.Instance.SetScore(playerData.score);
     }

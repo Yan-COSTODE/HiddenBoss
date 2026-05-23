@@ -10,6 +10,8 @@ public class Clock : Singleton<Clock>
     [SerializeField] private Transform minutesPin;
     [SerializeField] private Transform secondsPin;
 
+    public float CurrentTime => fTime;
+    
     private void Update()
     {
         UpdateTime();
