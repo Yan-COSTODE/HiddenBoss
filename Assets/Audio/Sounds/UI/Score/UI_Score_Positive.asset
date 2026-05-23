@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8885212565526457143
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-008_{-8885212565526457143}
+  m_AudioClip: {fileID: 8300000, guid: f08a6d0e14544984e8748e22e7a18861, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7611228835635462091
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-010_{-7611228835635462091}
+  m_AudioClip: {fileID: 8300000, guid: 23ae7e2c25de5fa49967d96c52f32ecb, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4631788577881461581
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-005_{-4631788577881461581}
+  m_AudioClip: {fileID: 8300000, guid: 7bb447995c16a6a4bb21b15932ab1293, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2540148025942818210
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-009_{-2540148025942818210}
+  m_AudioClip: {fileID: 8300000, guid: 5546c4bad4d280049aec60fd6fcdfbfe, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1918663292588246797
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-006_{-1918663292588246797}
+  m_AudioClip: {fileID: 8300000, guid: 38f1f16dafb73ad4d939aace83513548, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-500681373257403564
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-002_{-500681373257403564}
+  m_AudioClip: {fileID: 8300000, guid: 48f9b18839f34a34b890731189e34671, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4872633726482218595
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-004_{4872633726482218595}
+  m_AudioClip: {fileID: 8300000, guid: c505ef65102ebe6439317dcfe1a2921c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4937925728706692679
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-001_{4937925728706692679}
+  m_AudioClip: {fileID: 8300000, guid: 963728f3f0b8dc848abc8044fc4e48f4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI_Score_Positive
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 4937925728706692679}
+  - {fileID: -500681373257403564}
+  - {fileID: 8374454112285874975}
+  - {fileID: 4872633726482218595}
+  - {fileID: -4631788577881461581}
+  - {fileID: -1918663292588246797}
+  - {fileID: 7876181483729942516}
+  - {fileID: -8885212565526457143}
+  - {fileID: -2540148025942818210}
+  - {fileID: -7611228835635462091}
+  m_AvoidRepeatingLast: 5
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7876181483729942516
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-007_{7876181483729942516}
+  m_AudioClip: {fileID: 8300000, guid: cb630d307ecebbf46a8b47d849c03eec, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8374454112285874975
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Score_Positive-003_{8374454112285874975}
+  m_AudioClip: {fileID: 8300000, guid: 6b2ff626553a91946b8c166716d47fe3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
