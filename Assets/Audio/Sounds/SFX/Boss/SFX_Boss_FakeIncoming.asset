@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8264901544029385109
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boss_FakeIncoming-004_{-8264901544029385109}
+  m_AudioClip: {fileID: 8300000, guid: 965c3ccba04e94440bee53b148772f78, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8198228542272278195
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boss_FakeIncoming-002_{-8198228542272278195}
+  m_AudioClip: {fileID: 8300000, guid: c2b15d353f89c234fa7bcb1c4aadf906, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7997792207670464798
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boss_FakeIncoming-005_{-7997792207670464798}
+  m_AudioClip: {fileID: 8300000, guid: e66ff92bdccc4d442b3b054f4b3b098c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7255486813450755075
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boss_FakeIncoming-001_{-7255486813450755075}
+  m_AudioClip: {fileID: 8300000, guid: 8b285fbb9658e6144b2e10c15b436e3d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5942246847063691545
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boss_FakeIncoming-003_{5942246847063691545}
+  m_AudioClip: {fileID: 8300000, guid: 6d72cd934e7d0b34098e5931da69a131, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX_Boss_FakeIncoming
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -7255486813450755075}
+  - {fileID: -8198228542272278195}
+  - {fileID: 5942246847063691545}
+  - {fileID: -8264901544029385109}
+  - {fileID: -7997792207670464798}
+  m_AvoidRepeatingLast: 1
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
