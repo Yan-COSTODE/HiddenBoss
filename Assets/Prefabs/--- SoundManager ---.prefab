@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 6418180475301049370, guid: 690f3bb5a217bbb41acd1ec33149087f, type: 2}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -726,7 +726,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 6418180475301049370, guid: 26ffafd8a4c77fd46a188acc447ae17e, type: 2}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1123,7 +1123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b629646905c1b914694219d141c68be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  gameWindowsObject: {fileID: 0}
+  cookieWindowsObject: {fileID: 0}
+  investmentWindowsObject: {fileID: 0}
   bossObject: {fileID: 0}
   taskGeneratorObject: {fileID: 0}
   AS_Ambiance: {fileID: 8538738259738441131}
@@ -1438,7 +1439,7 @@ AudioSource:
   m_GameObject: {fileID: 8086335589365890361}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5764840669021009136, guid: e85bbc6b3488cc04baba45a0d0e975c4, type: 2}
+  OutputAudioMixerGroup: {fileID: -2274101936909270780, guid: e85bbc6b3488cc04baba45a0d0e975c4, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 39e30c57c5aa67d4594c802f1483e5de, type: 3}
   m_PlayOnAwake: 0

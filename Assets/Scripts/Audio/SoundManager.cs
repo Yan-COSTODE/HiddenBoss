@@ -6,7 +6,8 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private GameWindows gameWindowsObject;
+    [SerializeField] private GameWindows cookieWindowsObject;
+    [SerializeField] private GameWindows investmentWindowsObject;
     [SerializeField] private Boss bossObject;
     [SerializeField] private TaskGenerator taskGeneratorObject;
     
@@ -39,8 +40,10 @@ public class SoundManager : MonoBehaviour
         masterMixer.SetFloat("volMaster", 0.0f);
 
         taskGeneratorObject.onTask += Working;
-        gameWindowsObject.OnOpened += GameOpen;
-        gameWindowsObject.OnClosed += GameClose;
+        cookieWindowsObject.OnOpened += GameOpen;
+        cookieWindowsObject.OnClosed += GameClose;
+        investmentWindowsObject.OnOpened += GameOpen;
+        investmentWindowsObject.OnClosed += GameClose;
         ControlManager.Instance.OnMouseClickPressed += ClickPressed;
         ControlManager.Instance.OnMouseClickReleased += ClickReleased;
         Player.Instance.OnScoreAdded += ScorePositive;
@@ -58,8 +61,10 @@ public class SoundManager : MonoBehaviour
     void OnDestroy()
     {
         taskGeneratorObject.onTask -= Working;
-        gameWindowsObject.OnOpened -= GameOpen;
-        gameWindowsObject.OnClosed -= GameClose;
+        cookieWindowsObject.OnOpened -= GameOpen;
+        cookieWindowsObject.OnClosed -= GameClose;
+        investmentWindowsObject.OnOpened -= GameOpen;
+        investmentWindowsObject.OnClosed -= GameClose;
         ControlManager.Instance.OnMouseClickPressed -= ClickPressed;
         ControlManager.Instance.OnMouseClickReleased -= ClickReleased;
         Player.Instance.OnScoreAdded -= ScorePositive;
@@ -86,6 +91,7 @@ public class SoundManager : MonoBehaviour
 
     void BossTalk()
     {
+        if (AS_SFX_Boss_Talk.isPlaying) return;
         AS_SFX_Boss_Talk.Play();
     }
 
@@ -150,6 +156,7 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(FadeOutMaster());
     }
     
+    
     IEnumerator FadeOutMaster()
     {
         float value = 0.0f;
@@ -161,4 +168,5 @@ public class SoundManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+    
 }
