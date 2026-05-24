@@ -117,11 +117,13 @@ public class SoundManager : MonoBehaviour
 
     void ClickPressed()
     {
+        if (AS_UI_Working.isPlaying) return;
         AS_UI_Click_In.Play();
     }
 
     void ClickReleased()
     {
+        if (AS_UI_Working.isPlaying) return;
         AS_UI_Click_Out.Play();
     }
 
