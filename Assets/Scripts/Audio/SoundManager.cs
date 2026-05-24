@@ -7,8 +7,11 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private GameWindows cookieWindowsObject;
     [SerializeField] private GameWindows investmentWindowsObject;
+    [SerializeField] private GameWindows rouletteWindowsObject;
     [SerializeField] private Boss bossObject;
     [SerializeField] private TaskGenerator taskGeneratorObject;
+    [SerializeField] private Stock stockGameObject;
+    [SerializeField] private Roulette roulettegameObject;
     
     [SerializeField] private AudioSource AS_Ambiance;
     [SerializeField] private AudioSource AS_Music;
@@ -21,6 +24,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource AS_SFX_Boss_Incoming;
     [SerializeField] private AudioSource AS_SFX_Boss_FakeIncoming;
     [SerializeField] private AudioSource AS_SFX_Boss_Talk;
+    [SerializeField] private AudioSource AS_UI_Bourse_Bet;
+    [SerializeField] private AudioSource AS_UI_Bourse_Loose;
+    [SerializeField] private AudioSource AS_UI_Bourse_Win;
+    [SerializeField] private AudioSource AS_UI_Roulette_Loose;
+    [SerializeField] private AudioSource AS_UI_Roulette_Win;
 
     [SerializeField] private AudioMixer masterMixer;
 
@@ -43,6 +51,13 @@ public class SoundManager : MonoBehaviour
         cookieWindowsObject.OnClosed += GameClose;
         investmentWindowsObject.OnOpened += GameOpen;
         investmentWindowsObject.OnClosed += GameClose;
+        rouletteWindowsObject.OnOpened += GameOpen;
+        rouletteWindowsObject.OnClosed += GameClose;
+        stockGameObject.onCashIn += BourseBet;
+        stockGameObject.onCashOutNeg += BourseLoose;
+        stockGameObject.onCashOutPos += BourseWin;
+        roulettegameObject.onLose += RouletteLoose;
+        roulettegameObject.onWin += RouletteWin;
         ControlManager.Instance.OnMouseClickPressed += ClickPressed;
         ControlManager.Instance.OnMouseClickReleased += ClickReleased;
         Player.Instance.OnScoreAdded += ScorePositive;
@@ -130,6 +145,31 @@ public class SoundManager : MonoBehaviour
     {
         AS_UI_Working.Play();
     }
+
+    void BourseBet()
+    {
+        AS_UI_Bourse_Bet.Play();
+    }
+
+    void BourseLoose()
+    {
+        AS_UI_Bourse_Loose.Play();
+    }
+
+    void BourseWin()
+    {
+        AS_UI_Bourse_Win.Play();
+    }
+
+    void RouletteLoose()
+    {
+        AS_UI_Roulette_Loose.Play();
+    }
+
+    void RouletteWin()
+    {
+        AS_UI_Roulette_Win.Play();
+    }
     
     void LooseGame()
     {
@@ -148,5 +188,4 @@ public class SoundManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-    
 }
