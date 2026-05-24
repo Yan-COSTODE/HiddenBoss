@@ -14,6 +14,9 @@ public class Roulette : MonoBehaviour
     [SerializeField] private Button blackButton;
     [SerializeField] private float fAnimationTime = 3.0f;
     [SerializeField] private float fAnimationSpeed = 3.0f;
+    [SerializeField] private Image coinsImage;
+    [SerializeField] private Sprite redCoinSprite;
+    [SerializeField] private Sprite blackCoinSprite;
     private double fScoreIn = 0.0f;
     private Color scoreIn = Color.white;
 
@@ -35,6 +38,8 @@ public class Roulette : MonoBehaviour
         scoreIn = Color.red;
         fScoreIn = Player.Instance.PlayerData.score;
         Player.Instance.AddScore(-fScoreIn);
+        coinsImage.sprite = redCoinSprite;
+        coinsImage.gameObject.SetActive(true);
         LaunchRoulette();
     }
     
@@ -43,6 +48,8 @@ public class Roulette : MonoBehaviour
         scoreIn = Color.black;
         fScoreIn = Player.Instance.PlayerData.score;
         Player.Instance.AddScore(-fScoreIn);
+        coinsImage.sprite = blackCoinSprite;
+        coinsImage.gameObject.SetActive(true);
         LaunchRoulette();
     }
 
@@ -76,6 +83,7 @@ public class Roulette : MonoBehaviour
 
         fScoreIn = 0.0f;
         
+        coinsImage.gameObject.SetActive(false);
         GetComponentInParent<GameWindows>().CloseButton.interactable = true;
         redButton.interactable = true;
         blackButton.interactable = true;
