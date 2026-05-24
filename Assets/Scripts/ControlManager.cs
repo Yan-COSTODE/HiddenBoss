@@ -8,6 +8,7 @@ public class ControlManager : Singleton<ControlManager>
     
     [SerializeField] private KeyCode switchCamera = KeyCode.Space;
     [SerializeField] private bool bDisable = true;
+    [SerializeField] private GameObject clickBlocker;
 
     public bool Disabled => bDisable;
     
@@ -24,6 +25,11 @@ public class ControlManager : Singleton<ControlManager>
         
         if (Input.GetKeyDown(switchCamera))
             CameraManager.Instance.SwitchCamera();
+    }
+
+    public void SetClickBlocker(bool _status)
+    {
+        clickBlocker.SetActive(_status);
     }
     
     public void SetEnable(bool _status)

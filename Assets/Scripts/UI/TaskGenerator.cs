@@ -23,10 +23,8 @@ public class TaskGenerator : MonoBehaviour
     [SerializeField] private TMP_Text taskText;
     [Header("Settings")] 
     [SerializeField, Range(0.0f, 30.0f)] private float fTaskTime = 10.0f;
-    private ETaskType taskType = ETaskType.NONE;
     private int iLineCount = 0;
 
-    public ETaskType TaskType => taskType;
 
     private void Awake()
     {
@@ -47,7 +45,7 @@ public class TaskGenerator : MonoBehaviour
     
     private void StartTask(ETaskType _taskType)
     {
-        taskType = _taskType;
+        Player.Instance.SetTaskType(_taskType);
         ControlManager.Instance.SetEnable(false);
         taskText.text = "";
         iLineCount = 0;
@@ -71,7 +69,7 @@ public class TaskGenerator : MonoBehaviour
     private void EndOfTask()
     {
         ControlManager.Instance.SetEnable(true);
-        taskType = ETaskType.NONE;
+        Player.Instance.SetTaskType(ETaskType.NONE);
         SetAllButtonVisibility(true);
     }
 
@@ -111,18 +109,18 @@ public class TaskGenerator : MonoBehaviour
     //Excel
     private void Task2()
     {
-        
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
     }
     
     //Mail
     private void Task3()
     {
-        
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
     }
     
     //Office
     private void Task4()
     {
-        
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
     }
 }

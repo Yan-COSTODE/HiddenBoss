@@ -29,14 +29,19 @@ public class Clock : Singleton<Clock>
     private void UpdateClock()
     {
         Vector3Int _time = GetTime();
-        hoursPin.localEulerAngles = new Vector3(0.0f, GetRotation(0, 24, _time.x), 0.0f);
+        hoursPin.localEulerAngles = new Vector3(0.0f, GetRotationHours(0, 24, _time.x), 0.0f);
         minutesPin.localEulerAngles = new Vector3(0.0f, GetRotation(0, 60, _time.y), 0.0f);
         secondsPin.localEulerAngles = new Vector3(0.0f, GetRotation(0, 60, _time.z), 0.0f);
     }
 
     private float GetRotation(float _min, float _max, float _value)
     {
-        return (_value - _min) / (_max - _min) * -360.0f;
+        return (_value - _min) / (_max - _min) * 360.0f;
+    }
+    
+    private float GetRotationHours(float _min, float _max, float _value)
+    {
+        return (_value - _min) / (_max - _min) * 720.0f;
     }
     
     public Vector3Int GetTime()

@@ -34,11 +34,11 @@ public class StartMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         windowsButton.interactable = false;
+        ControlManager.Instance.SetEnable(true);
         
         foreach (GameObject _go in toActivate)
             _go.SetActive(true);
 
-        Boss.Instance.onBossEnter?.Invoke();
         Boss.Instance.GenerateTask();
     }
     

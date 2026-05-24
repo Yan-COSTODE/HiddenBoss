@@ -26,16 +26,19 @@ public class GameWindows : MonoBehaviour
 
     public void Open()
     {
-        float _time = fOpeningTime;
         OnOpened?.Invoke();
-        rectTransform.DOMoveLocal(Vector3.zero, _time, easing);
-        transform.DOScale(Vector3.one, _time, easing);
+        ControlManager.Instance.SetClickBlocker(true);
+        rectTransform.DOMoveLocal(Vector3.zero, fOpeningTime, easing);
+        transform.DOScale(Vector3.one, fOpeningTime, easing);
+        TimerManager.Instance.Create(fOpeningTime, EEasing.EASE_NONE, () => ControlManager.Instance.SetClickBlocker(false));
     }
 
     public void Close()
     {
         OnClosed?.Invoke();
+        ControlManager.Instance.SetClickBlocker(true);
         rectTransform.DOMoveLocal(closeTransform.anchoredPosition, fClosingTime, easing);
         transform.DOScale(Vector3.zero, fClosingTime, easing);
+        TimerManager.Instance.Create(fClosingTime, EEasing.EASE_NONE, () => ControlManager.Instance.SetClickBlocker(false));
     }
 }

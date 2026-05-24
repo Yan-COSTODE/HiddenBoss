@@ -17,14 +17,31 @@ public class Boss : Singleton<Boss>
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float fSpeedOfSpeech = 0.1f;
     [SerializeField] private float fDeleteDelay = 5.0f;
+    [SerializeField, Range(0.0f, 10.0f)] private float fShakeIntensity = 1.0f;
+    [SerializeField, Range(0.0f, 100.0f)] private float fShakeSpeed = 10.0f;
     [SerializeField] private GameObject visual;
+    [SerializeField] private Animator doorAnimator;
     private float fTimeOfTask = -1.0f;
     private ETaskType taskNeeded = ETaskType.NONE;
     private string dialogue = "";
+    private bool bShaking = false;
+    private Coroutine shakeCoroutine;
     
     public float TimeOfTask => fTimeOfTask;
     public ETaskType TaskNeeded => taskNeeded;
     public string Dialogue => dialogue;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        onBossEnter += BossEnter;
+        onBossExit += BossExit;
+    }
+
+    private void Start()
+    {
+        dialogueText.ForceMeshUpdate();
+    }
 
     private void Update()
     {
@@ -49,16 +66,22 @@ public class Boss : Singleton<Boss>
         StartCoroutine(CheckerIE());
     }
 
+    private void BossEnter()
+    {
+        doorAnimator.Play("Enter");
+    }
+    
+    private void BossExit()
+    {
+        doorAnimator.Play("Exit");
+    }
+    
     private IEnumerator CheckerIE()
     {
         OnBossCheck?.Invoke();
-        Debug.Log("BossCheck");
         yield return new WaitForSeconds(5.0f);
         onBossEnter?.Invoke();
-        Debug.Log("BossEnter");
         yield return new WaitForSeconds(2.0f);
-        
-        Debug.Log("BossVerif");
         
         if (Player.Instance.CurrentTask == taskNeeded)
         {
@@ -72,11 +95,64 @@ public class Boss : Singleton<Boss>
             dialogue =
                 "OoooOOOOoOOoOOooOOoHHHHH WwwwwWHhHHHHAaAAaAATTTTTTtt AAAAaAaAaAaRRrrrrreeeeeeeEE YYYYYYYyyyyOOOOoooUUUUuuuUUu DDDDDddddOOOOOooIIIiiiinnnNNNGGGGggg !!????!!!";
             StartCoroutine(WriteText());
+            ControlManager.Instance.SetEnable(false);
             yield return new WaitForSeconds(5.0f + fDeleteDelay);
             Reload();
         }
     }
 
+    private void StartShake()
+    {
+        bShaking = true;
+        shakeCoroutine = StartCoroutine(ShakeText());
+    }
+
+    private void StopShake()
+    {
+        bShaking = false;
+        
+        if (shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
+        
+        dialogueText.ForceMeshUpdate();
+    }
+    
+    private IEnumerator ShakeText()
+    {
+        while (bShaking)
+        {
+            dialogueText.ForceMeshUpdate();
+            TMP_TextInfo _textInfo = dialogueText.textInfo;
+
+            for (int i = 0; i < _textInfo.characterCount; i++)
+            {
+                TMP_CharacterInfo _charInfo = _textInfo.characterInfo[i];
+                
+                if (!_charInfo.isVisible)
+                    continue;
+
+                int _vertexIndex = _charInfo.vertexIndex;
+                int _materialIndex = _charInfo.materialReferenceIndex;
+                Vector3[] _verts = _textInfo.meshInfo[_materialIndex].vertices;
+                Vector3 _offset = new Vector3(Random.Range(-fShakeIntensity, fShakeIntensity), Random.Range(-fShakeIntensity, fShakeIntensity), 0);
+                _verts[_vertexIndex + 0] += _offset;
+                _verts[_vertexIndex + 1] += _offset;
+                _verts[_vertexIndex + 2] += _offset;
+                _verts[_vertexIndex + 3] += _offset;
+                
+            }
+            
+            for (int i = 0; i < _textInfo.meshInfo.Length; i++)
+            {
+                TMP_MeshInfo _meshInfo = _textInfo.meshInfo[i];
+                _meshInfo.mesh.vertices = _meshInfo.vertices;
+                dialogueText.UpdateGeometry(_meshInfo.mesh, i);
+            }
+            
+            yield return new WaitForSeconds(1.0f / fShakeSpeed);
+        }
+    }
+    
     private void Reload()
     {
         LeaderboardManager.Instance.AddScoreToLeaderBoard(Player.Instance.PlayerData);
@@ -84,10 +160,11 @@ public class Boss : Singleton<Boss>
         SceneManager.LoadScene(_currentSceneName);
     }
     
-    private IEnumerator WriteText()
+    private IEnumerator WriteText(bool _final = false)
     {
         WaitForSeconds _delay = new WaitForSeconds(fSpeedOfSpeech);
 
+        StartShake();
         for (int i = 0; i < dialogue.Length; ++i)
         {
             if (i == 0 || dialogueText.text[^1] == ' ')
@@ -107,12 +184,18 @@ public class Boss : Singleton<Boss>
         }
         
         yield return new WaitForSeconds(fDeleteDelay);
+        
+        if (!_final)
+            ControlManager.Instance.SetClickBlocker(false);
+        
+        StopShake();
         onBossExit?.Invoke();
         visual.SetActive(false);
     }
     
     public void GenerateTask(string _prefix = "")
     {
+        ControlManager.Instance.SetClickBlocker(true);
         visual.SetActive(true);
         taskNeeded = (ETaskType)Random.Range(1, 5);
         fTimeOfTask = Clock.Instance.CurrentTime + Random.Range(60.0f * 60.0f * 1.0f, 60.0f * 60.0f * 3.0f);
