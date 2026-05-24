@@ -107,8 +107,11 @@ public class Boss : Singleton<Boss>
             dialogue =
                 "OoooOOOOoOOoOOooOOoHHHHH WwwwwWHhHHHHAaAAaAATTTTTTtt AAAAaAaAaAaRRrrrrreeeeeeeEE YYYYYYYyyyyOOOOoooUUUUuuuUUu DDDDDddddOOOOOooIIIiiiinnnNNNGGGGggg !!????!!!";
             StartCoroutine(WriteText(true));
+            ControlManager.Instance.SetClickBlocker(true);
             ControlManager.Instance.SetEnable(false);
-            yield return new WaitForSeconds(fDeleteDelay);
+            yield return new WaitForSeconds(fDeleteDelay / 2.0f);
+            ControlManager.Instance.SetClickBlocker(true);
+            yield return new WaitForSeconds(fDeleteDelay / 2.0f);
             onGameFinished?.Invoke();
             yield return new WaitForSeconds(5.0f);
             Reload();

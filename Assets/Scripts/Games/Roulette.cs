@@ -60,7 +60,8 @@ public class Roulette : MonoBehaviour
 
     private Color GetRouletteColor()
     {
-        return Color.red;
+        float _angle = rouletteImage.localEulerAngles.z % 22.5f;
+        return _angle <= 11.25 ? Color.black : Color.red;
     }
     
     private void EndRoulette()
