@@ -13,6 +13,7 @@ public class Boss : Singleton<Boss>
     public Action OnBossFakeCheck;
     public Action onBossEnter;
     public Action onBossExit;
+    public Action onGameFinished;
     
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float fSpeedOfSpeech = 0.1f;
@@ -90,13 +91,16 @@ public class Boss : Singleton<Boss>
         }
         else
         {
+            ControlManager.Instance.SetClickBlocker(true);
             dialogueText.text = "";
             visual.SetActive(true);
             dialogue =
                 "OoooOOOOoOOoOOooOOoHHHHH WwwwwWHhHHHHAaAAaAATTTTTTtt AAAAaAaAaAaRRrrrrreeeeeeeEE YYYYYYYyyyyOOOOoooUUUUuuuUUu DDDDDddddOOOOOooIIIiiiinnnNNNGGGGggg !!????!!!";
-            StartCoroutine(WriteText());
+            StartCoroutine(WriteText(true));
             ControlManager.Instance.SetEnable(false);
-            yield return new WaitForSeconds(5.0f + fDeleteDelay);
+            yield return new WaitForSeconds(fDeleteDelay);
+            onGameFinished?.Invoke();
+            yield return new WaitForSeconds(5.0f);
             Reload();
         }
     }
@@ -209,9 +213,9 @@ public class Boss : Singleton<Boss>
         switch (taskNeeded)
         {
             case ETaskType.TASK1: return "Console Programming";
-            case ETaskType.TASK2: return "Tab Terminator";
+            case ETaskType.TASK2: return "Spreadsheet Terminator";
             case ETaskType.TASK3: return "Mail Sender";
-            case ETaskType.TASK4: return "Typer Flow";
+            case ETaskType.TASK4: return "Writer Flow";
         }
         
         return "None";

@@ -15,6 +15,8 @@ public enum ETaskType
 
 public class TaskGenerator : MonoBehaviour
 {
+    public Action onTask;
+    
     [Header("References")]
     [SerializeField] private Button task1Button;
     [SerializeField] private Button task2Button;
@@ -50,6 +52,7 @@ public class TaskGenerator : MonoBehaviour
         taskText.text = "";
         iLineCount = 0;
         SetAllButtonVisibility(false);
+        onTask?.Invoke();
 
         switch (_taskType)
         {
