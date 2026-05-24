@@ -1,21 +1,28 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem.iOS;
+using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private GameWindows gameWindowsObject;
     [SerializeField] private Boss bossObject;
+    [SerializeField] private TaskGenerator taskGeneratorObject;
     
     [SerializeField] private AudioSource AS_Ambiance;
     [SerializeField] private AudioSource AS_Music;
     [SerializeField] private AudioSource AS_UI_Click_In;
     [SerializeField] private AudioSource AS_UI_Click_Out;
     [SerializeField] private AudioSource AS_UI_Score_Positive;
+    [SerializeField] private AudioSource AS_UI_Working;
     [SerializeField] private AudioSource AS_SFX_Boss_DoorOpen;
     [SerializeField] private AudioSource AS_SFX_Boos_DoorClose;
     [SerializeField] private AudioSource AS_SFX_Boss_Incoming;
     [SerializeField] private AudioSource AS_SFX_Boss_FakeIncoming;
     [SerializeField] private AudioSource AS_SFX_Boss_Talk;
+
+    [SerializeField] private AudioMixer masterMixer;
 
     [SerializeField] private float fadeVolumeIncrement = 0.01f;
     
@@ -29,6 +36,9 @@ public class SoundManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        masterMixer.SetFloat("volMaster", 0.0f);
+
+        taskGeneratorObject.onTask += Working;
         gameWindowsObject.OnOpened += GameOpen;
         gameWindowsObject.OnClosed += GameClose;
         ControlManager.Instance.OnMouseClickPressed += ClickPressed;
@@ -39,6 +49,7 @@ public class SoundManager : MonoBehaviour
         bossObject.OnBossFakeCheck += BossFakeIncoming;
         bossObject.onBossEnter += BossOpenDoor;
         bossObject.onBossExit += BossCloseDoor;
+        bossObject.onGameFinished += LooseGame;
         
         GameClose();
     }
@@ -46,6 +57,7 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void OnDestroy()
     {
+        taskGeneratorObject.onTask -= Working;
         gameWindowsObject.OnOpened -= GameOpen;
         gameWindowsObject.OnClosed -= GameClose;
         ControlManager.Instance.OnMouseClickPressed -= ClickPressed;
@@ -56,6 +68,7 @@ public class SoundManager : MonoBehaviour
         bossObject.OnBossFakeCheck -= BossFakeIncoming;
         bossObject.onBossEnter -= BossOpenDoor;
         bossObject.onBossExit -= BossCloseDoor;
+        bossObject.onGameFinished -= LooseGame;
     }
 
     private void Update()
@@ -66,11 +79,9 @@ public class SoundManager : MonoBehaviour
 
     private void ChangeVolume(AudioSource soundEmitter, bool soundVolumeChecked, float soundVolumeAimed)
     {
-        if (!soundVolumeChecked)
-        {
-            if (Math.Round(soundEmitter.volume, 3) != Math.Round(soundVolumeAimed, 3)) soundEmitter.volume += Mathf.Clamp(Mathf.Sign(soundVolumeAimed-soundEmitter.volume)*fadeVolumeIncrement, -soundEmitter.volume, 1.0f - soundEmitter.volume);
-            else soundVolumeChecked = true;
-        }
+        if (soundVolumeChecked) return;
+        if (Math.Round(soundEmitter.volume, 3) != Math.Round(soundVolumeAimed, 3)) soundEmitter.volume += Mathf.Clamp(Mathf.Sign(soundVolumeAimed-soundEmitter.volume)*fadeVolumeIncrement, -soundEmitter.volume, 1.0f - soundEmitter.volume);
+        else soundVolumeChecked = true;
     }
 
     void BossTalk()
@@ -127,5 +138,27 @@ public class SoundManager : MonoBehaviour
         musicVolumeAimed = 0.0f;
         ambianceVolumeChecked = false;
         musicVolumeChecked = false;
+    }
+
+    void Working()
+    {
+        AS_UI_Working.Play();
+    }
+    
+    void LooseGame()
+    {
+        StartCoroutine(FadeOutMaster());
+    }
+    
+    IEnumerator FadeOutMaster()
+    {
+        float value = 0.0f;
+
+        while (value > -80.0f)
+        {
+            value = Mathf.Clamp(value - 1.0f, -80.0f, 0.0f);
+            masterMixer.SetFloat("volMaster", value);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
