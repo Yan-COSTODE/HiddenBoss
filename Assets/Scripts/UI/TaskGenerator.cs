@@ -28,6 +28,7 @@ public class TaskGenerator : MonoBehaviour
     [SerializeField] private GameObject excelBackground;
     [SerializeField] private GameObject mailVideo;
     [SerializeField] private GameObject officeVideo;
+    [SerializeField] private Image progressBar;
     [Header("Settings")] 
     [SerializeField, Range(0.0f, 30.0f)] private float fTaskTime = 10.0f;
     private int iLineCount = 0;
@@ -112,7 +113,7 @@ public class TaskGenerator : MonoBehaviour
         taskText.font = taskConsoleFont;
         taskText.color = Color.green;
         
-        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, null, f =>
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, SetProgressBar, f =>
         {
             string _line = "";
             
@@ -148,6 +149,7 @@ public class TaskGenerator : MonoBehaviour
         
         TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, () =>
         {
+            SetProgressBar();
             int _value = 0;
             _tab[0] = $"\n{" Nbr.", -5}{"  Object", -15}{"Value", 4}  .\n";
             
@@ -165,13 +167,21 @@ public class TaskGenerator : MonoBehaviour
     private void Task3()
     {
         mailVideo.SetActive(true);
-        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, SetProgressBar);
     }
     
     //Office
     private void Task4()
     {
         officeVideo.SetActive(true);
-        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, SetProgressBar);
+    }
+
+    private void SetProgressBar()
+    {
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, () => progressBar.fillAmount = 0.0f, null, f =>
+        {
+            progressBar.fillAmount = f / fTaskTime;
+        });
     }
 }
