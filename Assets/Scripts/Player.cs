@@ -31,6 +31,11 @@ public class Player : Singleton<Player>
         playerData.fTimer = 0;
     }
 
+    private void Start()
+    {
+        AddScore(0);
+    }
+    
     private void Update()
     {
         playerData.fTimer += Time.deltaTime;

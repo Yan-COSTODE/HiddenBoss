@@ -232,7 +232,7 @@ public class Boss : Singleton<Boss>
     
     private void GenerateDialogue(string _prefix = "")
     {
-        dialogue = _prefix == "" ? "Hi, you trash. You know i'm your favorite boss paying you for minimum wages" : _prefix;
+        dialogue = _prefix == "" ? "Hi, you trash. You know i'm your favorite boss paying you for minimum wages." : _prefix;
         dialogue += " I want you to be on <b>";
         dialogue += GetTaskName();
         dialogue += "</b> by the time i come at around <b>";

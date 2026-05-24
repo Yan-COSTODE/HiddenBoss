@@ -23,6 +23,11 @@ public class TaskGenerator : MonoBehaviour
     [SerializeField] private Button task3Button;
     [SerializeField] private Button task4Button;
     [SerializeField] private TMP_Text taskText;
+    [SerializeField] private TMP_FontAsset taskConsoleFont;
+    [SerializeField] private TMP_FontAsset taskExcelFont;
+    [SerializeField] private GameObject excelBackground;
+    [SerializeField] private GameObject mailVideo;
+    [SerializeField] private GameObject officeVideo;
     [Header("Settings")] 
     [SerializeField, Range(0.0f, 30.0f)] private float fTaskTime = 10.0f;
     private int iLineCount = 0;
@@ -73,6 +78,11 @@ public class TaskGenerator : MonoBehaviour
     {
         ControlManager.Instance.SetEnable(true);
         Player.Instance.SetTaskType(ETaskType.NONE);
+        excelBackground.SetActive(false);
+        officeVideo.SetActive(false);
+        mailVideo.SetActive(false);
+        taskText.font = taskConsoleFont;
+        taskText.text = "";
         SetAllButtonVisibility(true);
     }
 
@@ -94,6 +104,8 @@ public class TaskGenerator : MonoBehaviour
     private void Task1()
     {
         int _length = 50;
+        taskText.font = taskConsoleFont;
+        taskText.color = Color.green;
         
         TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, null, f =>
         {
@@ -109,21 +121,52 @@ public class TaskGenerator : MonoBehaviour
         });
     }
     
+    private void AddExcel(string[] _tab)
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            taskText.text += _tab[i] + '\n';
+            int _index = taskText.text.IndexOf('\n', StringComparison.OrdinalIgnoreCase);
+            taskText.text = taskText.text.Substring(_index);
+        }
+    }
+    
     //Excel
     private void Task2()
     {
-        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
+        string[] randWordTab = {"cat", "dog", "potatoe", "computer", "fuckboss", "evolve", "monday", "to-do", "employee", "taget", "leviosa", "boss mom", "month", "money"};
+        string[] _tab = new string[15];
+        int _id = Random.Range(000, 980);
+        taskText.font = taskExcelFont;
+        taskText.color = Color.black;
+        excelBackground.SetActive(true);
+        
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, null, f =>
+        {
+            int _value = 0;
+            _tab[0] = $"\n{" Nbr.", -5}{"  Object", -15}{"Value", 4}  .\n";
+            
+            for (int i = 1; i < 15; i++)
+            {
+                _value = Random.Range(1000, 9999);
+                _tab[i] = $" {_id + i, -5} {randWordTab[Random.Range(0, randWordTab.Length)], -13}{_value, 4}" + "  .";
+            }
+            
+            AddExcel(_tab);
+        });
     }
     
     //Mail
     private void Task3()
     {
+        mailVideo.SetActive(true);
         TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
     }
     
     //Office
     private void Task4()
     {
+        officeVideo.SetActive(true);
         TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask);
     }
 }

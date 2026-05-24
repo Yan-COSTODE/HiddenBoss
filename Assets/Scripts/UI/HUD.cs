@@ -5,7 +5,7 @@ using UnityEngine;
 public class HUD : Singleton<HUD>
 {
     [SerializeField] private TMP_Text timeText;
-    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text[] scoreText;
 
     private void Start()
     {
@@ -24,9 +24,16 @@ public class HUD : Singleton<HUD>
     
     public void SetScore(double _score)
     {
+        foreach (TMP_Text _text in scoreText)
+            _text.text = $"{_score:N0}";
+        
+        /*
         string _raw = _score.ToString("e3");
         string[] _parts = _raw.Split("e");
         int _power = int.Parse(_parts[1]);
-        scoreText.text = $"{_parts[0]}<size=50%>x</size>10<sup>{_power}</sup>";
+
+        foreach (TMP_Text _text in scoreText)
+            _text.text = $"{_parts[0]}<size=50%>x</size>10<sup>{_power}</sup>";
+            */
     }
 }
