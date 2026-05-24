@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.InputSystem.iOS;
 using System.Collections;
 
 public class SoundManager : MonoBehaviour
@@ -55,25 +54,6 @@ public class SoundManager : MonoBehaviour
         bossObject.onGameFinished += LooseGame;
         
         GameClose();
-    }
-
-    // Update is called once per frame
-    void OnDestroy()
-    {
-        taskGeneratorObject.onTask -= Working;
-        cookieWindowsObject.OnOpened -= GameOpen;
-        cookieWindowsObject.OnClosed -= GameClose;
-        investmentWindowsObject.OnOpened -= GameOpen;
-        investmentWindowsObject.OnClosed -= GameClose;
-        ControlManager.Instance.OnMouseClickPressed -= ClickPressed;
-        ControlManager.Instance.OnMouseClickReleased -= ClickReleased;
-        Player.Instance.OnScoreAdded -= ScorePositive;
-        bossObject.OnWordTalked -=  BossTalk;
-        bossObject.OnBossCheck -= BossIncoming;
-        bossObject.OnBossFakeCheck -= BossFakeIncoming;
-        bossObject.onBossEnter -= BossOpenDoor;
-        bossObject.onBossExit -= BossCloseDoor;
-        bossObject.onGameFinished -= LooseGame;
     }
 
     private void Update()

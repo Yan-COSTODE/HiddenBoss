@@ -11,6 +11,12 @@ public class ControlManager : Singleton<ControlManager>
     [SerializeField] private GameObject clickBlocker;
 
     public bool Disabled => bDisable;
+
+    private void OnDestroy()
+    {
+        OnMouseClickPressed = null;
+        OnMouseClickReleased = null;
+    }
     
     private void Update()
     {

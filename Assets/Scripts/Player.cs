@@ -35,7 +35,12 @@ public class Player : Singleton<Player>
     {
         AddScore(0);
     }
-    
+
+    private void OnDestroy()
+    {
+        OnScoreAdded = null;
+    }
+
     private void Update()
     {
         playerData.fTimer += Time.deltaTime;

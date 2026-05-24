@@ -23,6 +23,13 @@ public class Roulette : MonoBehaviour
         blackButton.onClick.AddListener(BlackButton);
     }
 
+    private void OnDestroy()
+    {
+        onBet = null;
+        onWin = null;
+        onLose = null;
+    }
+
     private void RedButton()
     {
         scoreIn = Color.red;

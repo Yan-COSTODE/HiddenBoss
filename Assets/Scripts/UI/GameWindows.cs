@@ -24,6 +24,12 @@ public class GameWindows : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
+    private void OnDestroy()
+    {
+        OnOpened = null;
+        OnClosed = null;
+    }
+
     public void Open()
     {
         OnOpened?.Invoke();

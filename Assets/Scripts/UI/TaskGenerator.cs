@@ -41,6 +41,11 @@ public class TaskGenerator : MonoBehaviour
         task4Button.onClick.AddListener(() => StartTask(ETaskType.TASK4));
     }
 
+    private void OnDestroy()
+    {
+        onTask = null;
+    }
+
     private void SetAllButtonVisibility(bool _status)
     {
         task1Button.interactable = _status;

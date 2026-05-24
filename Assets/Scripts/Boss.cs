@@ -44,6 +44,16 @@ public class Boss : Singleton<Boss>
         dialogueText.ForceMeshUpdate();
     }
 
+    private void OnDestroy()
+    {
+        OnWordTalked = null;
+        OnBossCheck = null;
+        OnBossFakeCheck = null;
+        onBossEnter = null;
+        onBossExit = null;
+        onGameFinished = null;
+    }
+
     private void Update()
     {
         Checker();

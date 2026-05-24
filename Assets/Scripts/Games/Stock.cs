@@ -33,6 +33,13 @@ public class Stock : MonoBehaviour
         TimerManager.Instance.Create(fStockSpeed, EEasing.EASE_NONE, GenerateStockAmount, null, null, true);
     }
 
+    private void OnDestroy()
+    {
+        onCashIn = null;
+        onCashOutNeg = null;
+        onCashOutPos = null;
+    }
+
     private void GenerateStockAmount()
     {
         fCurrentStock = Random.Range(-15.0f, 5.0f);
