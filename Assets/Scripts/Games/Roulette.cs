@@ -85,7 +85,10 @@ public class Roulette : MonoBehaviour
             Player.Instance.AddScore(fScoreIn * 2.0f);
         }
         else
+        {
             onLose?.Invoke();
+            Player.Instance.AddScore(fScoreIn * 0.5f);
+        }
 
         fScoreIn = 0.0f;
         

@@ -7859,9 +7859,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1736849643}
     - target: {fileID: 697509220016067842, guid: 62bed34a5080916488be7d23fa3030ed, type: 3}
+      propertyPath: stockGameObject
+      value: 
+      objectReference: {fileID: 1787671735}
+    - target: {fileID: 697509220016067842, guid: 62bed34a5080916488be7d23fa3030ed, type: 3}
       propertyPath: gameWindowsObject
       value: 
       objectReference: {fileID: 1341095783}
+    - target: {fileID: 697509220016067842, guid: 62bed34a5080916488be7d23fa3030ed, type: 3}
+      propertyPath: roulettegameObject
+      value: 
+      objectReference: {fileID: 372955900}
     - target: {fileID: 697509220016067842, guid: 62bed34a5080916488be7d23fa3030ed, type: 3}
       propertyPath: cookieWindowsObject
       value: 
@@ -7870,6 +7878,10 @@ PrefabInstance:
       propertyPath: taskGeneratorObject
       value: 
       objectReference: {fileID: 328249001}
+    - target: {fileID: 697509220016067842, guid: 62bed34a5080916488be7d23fa3030ed, type: 3}
+      propertyPath: rouletteWindowsObject
+      value: 
+      objectReference: {fileID: 372955897}
     - target: {fileID: 697509220016067842, guid: 62bed34a5080916488be7d23fa3030ed, type: 3}
       propertyPath: investmentWindowsObject
       value: 

@@ -19,6 +19,7 @@ public class Stock : MonoBehaviour
     [SerializeField] private Color negativeColor;
     [SerializeField] private float fCooldown = 1.0f;
     [SerializeField] private float fStockSpeed = 1.0f;
+    [SerializeField] private TMP_Text stockText;
     private float fCurrentStock = 0.0f;
     private double fScoreIn = 0.0f;
 
@@ -47,6 +48,8 @@ public class Stock : MonoBehaviour
         fCurrentStock = Random.Range(_min, _max);
         visualStockImage.color = fCurrentStock < 0 ? negativeColor : positiveColor;
         visualStock.localScale = fCurrentStock < 0 ? new Vector3(1.0f, fCurrentStock / -_min, 1.0f) : new Vector3(1.0f, fCurrentStock / _max, 1.0f);
+        stockText.text = $"{(fCurrentStock < 0 ? "-" : "+")}{Mathf.Abs(fCurrentStock):P}";
+        stockText.color = visualStockImage.color;
     }
     
     private void ToggleStock()
