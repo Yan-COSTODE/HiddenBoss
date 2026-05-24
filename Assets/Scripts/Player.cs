@@ -54,7 +54,9 @@ public class Player : Singleton<Player>
     
     public void AddScore(double _amount)
     {
-        OnScoreAdded?.Invoke();
+        if (_amount != 0)
+            OnScoreAdded?.Invoke();
+        
         playerData.score += _amount;
         HUD.Instance.SetScore(playerData.score);
     }

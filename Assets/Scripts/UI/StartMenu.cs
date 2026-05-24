@@ -27,6 +27,10 @@ public class StartMenu : MonoBehaviour
 
     private void UpdateName(string _name)
     {
+        if (_name.Length > 15)
+            _name = _name.Substring(0, 15);
+        
+        nameText.text = _name;
         Player.Instance.SetName(_name);
     }
     

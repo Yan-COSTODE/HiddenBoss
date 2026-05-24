@@ -35,6 +35,9 @@ public class Roulette : MonoBehaviour
 
     private void RedButton()
     {
+        if (Player.Instance.PlayerData.score <= 0.0)
+            return;
+        
         scoreIn = Color.red;
         fScoreIn = Player.Instance.PlayerData.score;
         Player.Instance.AddScore(-fScoreIn);
@@ -45,6 +48,9 @@ public class Roulette : MonoBehaviour
     
     private void BlackButton()
     {
+        if (Player.Instance.PlayerData.score <= 0.0)
+            return;
+        
         scoreIn = Color.black;
         fScoreIn = Player.Instance.PlayerData.score;
         Player.Instance.AddScore(-fScoreIn);

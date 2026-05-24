@@ -42,9 +42,11 @@ public class Stock : MonoBehaviour
 
     private void GenerateStockAmount()
     {
-        fCurrentStock = Random.Range(-15.0f, 5.0f);
+        float _min = -14.0f;
+        float _max = 4.0f;
+        fCurrentStock = Random.Range(_min, _max);
         visualStockImage.color = fCurrentStock < 0 ? negativeColor : positiveColor;
-        visualStock.localScale = fCurrentStock < 0 ? new Vector3(1.0f, fCurrentStock / 15.0f, 1.0f) : new Vector3(1.0f, fCurrentStock / 5.0f, 1.0f);
+        visualStock.localScale = fCurrentStock < 0 ? new Vector3(1.0f, fCurrentStock / -_min, 1.0f) : new Vector3(1.0f, fCurrentStock / _max, 1.0f);
     }
     
     private void ToggleStock()
@@ -57,6 +59,9 @@ public class Stock : MonoBehaviour
     
     private void InvestStock()
     {
+        if (Player.Instance.PlayerData.score <= 0.0)
+            return;
+        
         onCashIn?.Invoke();
         buttonText.text = "Cash Out";
         fScoreIn = Player.Instance.PlayerData.score;
@@ -67,17 +72,20 @@ public class Stock : MonoBehaviour
 
     private void TakeStock()
     {
+        if (fScoreIn <= 0.0)
+            return;
+        
         buttonText.text = "Cash In";
 
         if (fCurrentStock >= 0)
         {
             onCashOutPos?.Invoke();
-            Player.Instance.AddScore(fScoreIn * fCurrentStock);
+            Player.Instance.AddScore(fScoreIn * (1 + fCurrentStock));
         }
         else
         {
             onCashOutNeg?.Invoke();
-            Player.Instance.AddScore(fScoreIn / -fCurrentStock);
+            Player.Instance.AddScore(fScoreIn / (1 + -fCurrentStock));
         }
         
         fScoreIn = 0.0f;

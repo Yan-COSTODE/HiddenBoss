@@ -146,7 +146,7 @@ public class TaskGenerator : MonoBehaviour
         taskText.color = Color.black;
         excelBackground.SetActive(true);
         
-        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, null, f =>
+        TimerManager.Instance.Create(fTaskTime, EEasing.EASE_NONE, EndOfTask, () =>
         {
             int _value = 0;
             _tab[0] = $"\n{" Nbr.", -5}{"  Object", -15}{"Value", 4}  .\n";
